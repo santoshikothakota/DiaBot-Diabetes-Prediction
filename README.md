@@ -51,11 +51,9 @@ DiaBot-Diabetes-Prediction/
 
 ---
 
-## 🖥 Demo
+## 🌐 Live Demo
 
-Run locally and access in browser:
-
-http://127.0.0.1:5000
+https://diabot-diabetes-prediction.onrender.com
 
 Features include:
 - Health value-based diabetes prediction
@@ -95,5 +93,6 @@ http://127.0.0.1:5000
 
 Kothakota Santoshi  
 B.Tech Computer Science Engineering (2026 Graduate)
+
 
 
