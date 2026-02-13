@@ -48,7 +48,7 @@ DiaBot-Diabetes-Prediction/
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/yourusername/DiaBot-Diabetes-Prediction.git
+git clone https://github.com/santoshikothakota/DiaBot-Diabetes-Prediction.git
 cd DiaBot-Diabetes-Prediction
 pip install -r requirements.txt
 python app.py
@@ -75,3 +75,4 @@ http://127.0.0.1:5000
 
 Kothakota Santoshi  
 B.Tech Computer Science Engineering (2026 Graduate)
+
