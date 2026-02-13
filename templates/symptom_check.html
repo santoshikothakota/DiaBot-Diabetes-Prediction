@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Symptom Checker - Diabetes Prediction</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+   body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #00695c;
+  margin-bottom: 25px;
+}
+
+form {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #ffffffcc;
+  backdrop-filter: blur(6px);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+  font-size: 17px;
+  color: #064e3b;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  font-size: 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  outline: none;
+  border-color: #34d399;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3);
+}
+
+button {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  background: linear-gradient(90deg, #1d4ed8, #3b82f6);
+  color: white;
+  font-size: 18px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  transform: scale(1.02);
+}
+
+.result-section {
+  margin-top: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f0fdf4;
+  border: 2px dashed #22c55e;
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  color: #1b5e20;
+}
+
+.result-section h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.result-section p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.note {
+  text-align: center;
+  margin-top: 25px;
+  font-weight: bold;
+  color: #c62828;
+  font-size: 15px;
+}
+
+.nav-links {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.nav-links a {
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #2563eb;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e40af;
+}
+
+
+    @media (max-width: 600px) {
+      form, .result-section {
+        padding: 20px;
+      }
+
+      select {
+        font-size: 15px;
+      }
+
+      button {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🩺 Symptom-Based Diabetes Check</h1>
+
+  <form method="post" action="/symptom_predict">
+    <label for="fatigue">Do you often feel tired or fatigued?</label>
+    <select name="fatigue" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="frequent_urination">Do you urinate frequently?</label>
+    <select name="frequent_urination" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="blurred_vision">Do you experience blurred vision?</label>
+    <select name="blurred_vision" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="increased_thirst">Do you feel unusually thirsty?</label>
+    <select name="increased_thirst" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="slow_healing">Do wounds or cuts heal slowly?</label>
+    <select name="slow_healing" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="sudden_weight_loss">Have you experienced sudden weight loss?</label>
+    <select name="sudden_weight_loss" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+    <label for="increased_hunger">Do you feel hungrier than usual?</label>
+    <select name="increased_hunger" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="numbness">Do you experience numbness or tingling in hands or feet?</label>
+    <select name="numbness" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="recurrent_infections">Do you get infections frequently?</label>
+    <select name="recurrent_infections" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="dry_mouth">Do you often have a dry mouth?</label>
+    <select name="dry_mouth" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="headache">Do you experience frequent headaches?</label>
+    <select name="headache" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="irritability">Do you feel irritable or moody often?</label>
+    <select name="irritability" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="vision_change">Do you notice changes in your vision?</label>
+    <select name="vision_change" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="dry_skin">Do you have dry or itchy skin?</label>
+    <select name="dry_skin" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+
+    <button type="submit">Check Prediction</button>
+  </form>
+
+  {% if prediction %}
+    <div class="result-section">
+      <h3>Prediction: {{ prediction }}</h3>
+      <p><strong>Recommended Diet Plan:</strong> {{ diet or "N/A" }}</p>
+      <p><strong>Suggested Medicine:</strong> {{ medicine or "N/A" }}</p>
+    </div>
+  {% endif %}
+
+  <div class="note">
+    ⚠️ This result is for informational purposes only. Please consult a licensed healthcare provider for accurate diagnosis and treatment.
+  </div>
+
+</body>
+</html>

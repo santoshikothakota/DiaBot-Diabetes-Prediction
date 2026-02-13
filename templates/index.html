@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diabetes Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f5fbff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #004080;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+    details {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #333;
+      background: #f0f8ff;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: #004080;
+    }
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #004080;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #003060;
+    }
+    .result {
+      margin-top: 25px;
+      padding: 15px;
+      background: #eaf8ea;
+      border-left: 6px solid #28a745;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+    .mic-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      margin-top: 10px;
+      float: right;
+    }
+    .nav-links {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #87b2dc;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  {% extends "base.html" %}
+{% block content %}
+
+<div class="header">
+    <div>
+      <div class="logo-title">DiaBot</div>
+      <div class="slogan">“Always Here for Your Sugar Story”</div>
+    </div>
+  </div>
+  <div class="container">
+    <h1>🩺 Diabetes Predictor</h1>
+    <form action="/predict" method="POST" id="predictForm">
+
+      <label>Gender:</label>
+      <select name="gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+       <small>Biological sex may affect diabetes risk.</small>
+
+      
+      <label>🤰 Pregnancies:</label>
+     <input type="number" name="pregnancies" placeholder="Enter or leave blank if unknown" step="any" />
+      <details><summary>What it means</summary>
+        Number of times a person has been pregnant.<br>
+        <strong>Why it matters:</strong> Pregnancy can raise diabetes risk, especially gestational diabetes.
+      </details>
+
+      <label>🩸 Glucose (mg/dL):</label>
+<input type="number" name="glucose" placeholder="Enter or leave blank if unknown" step="any" />
+      <details><summary>What it means</summary>
+        Glucose is sugar in your blood. Your body uses it for energy.<br><br>
+        <strong>Normal range:</strong><br>
+        Before eating: 70–100 mg/dL<br>
+        After eating: up to 140 mg/dL<br><br>
+        <strong>Why it matters:</strong> High glucose may mean diabetes. Low can make you feel dizzy or tired.
+      </details>
+
+      <label>💓 Blood Pressure (mmHg):</label>
+      <input type="number" name="bp" placeholder="Enter or leave blank if unknown" step="any" />
+      <details><summary>What it means</summary>
+        The force of your blood pushing through your blood vessels.<br><br>
+        <strong>Normal:</strong> Around 120/80 mmHg (diastolic shown here).<br>
+        <strong>Why it matters:</strong> High pressure increases diabetes and heart risk.
+      </details>
+
+      <label>🧴 Skin Thickness (mm):</label>
+      <input type="number" name="skin" placeholder="Enter or leave blank if unknown" step="any" />
+      <details><summary>What it means</summary>
+        A way to measure body fat under your skin (using a skinfold tool).<br>
+        <strong>Why it matters:</strong> Too much body fat can raise the chance of type 2 diabetes.
+      </details>
+
+      <label>💉 Insulin (µU/mL):</label>
+       <input type="number" name="insulin" placeholder="Enter or leave blank if unknown" step="any" />
+      <details><summary>What it means</summary>
+        A hormone your body uses to control blood sugar.<br>
+        <strong>Why it matters:</strong> Low or high insulin levels can show signs of diabetes or insulin resistance.
+      </details>
+
+      <label>⚖️ BMI (kg/m²):</label>
+ <input type="number" name="bmi" placeholder="Enter or leave blank if unknown" step="any" />
+      <details><summary>What it means</summary>
+        Tells if your weight is healthy for your height.<br><br>
+        <strong>How to understand it:</strong><br>
+        Under 18.5 = Underweight<br>
+        18.5–24.9 = Healthy<br>
+        25–29.9 = Overweight<br>
+        30+ = Obese<br><br>
+        <strong>Why it matters:</strong> Being overweight increases diabetes risk.
+      </details>
+
+      <label>🧬 Diabetes Pedigree Function (DPF):</label>
+     <input type="number" name="dpf" placeholder="Enter or leave blank if unknown" step="any" />
+      <details><summary>What it means</summary>
+        A score (0 to 2.5) showing how strong your family history of diabetes is.<br>
+        <strong>Why it matters:</strong> If many relatives have diabetes, your risk might be higher.
+      </details>
+
+      <label>👶 Age (years):</label>
+ <input type="number" name="age" placeholder="Enter or leave blank if unknown" step="any" />
+      <details><summary>What it means</summary>
+        Your age in years.<br>
+        <strong>Why it matters:</strong> Risk of type 2 diabetes goes up after age 40 (but can happen earlier too).
+      </details>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <button class="mic-btn" onclick="startListening()">🎤</button>
+
+    {% if prediction %}
+    <div class="result">
+      <strong>{{ prediction }}</strong><br />
+      <strong>📝 Diet Advice:</strong> {{ diet }}<br />
+      <strong>💊 Medicine Tip:</strong> {{ medicine }}
+    </div>
+    {% endif %}
+
+    <div class="nav-links">
+      <a href="/symptom-check">🧩 Symptom Checker</a>
+      <a href="/diet-chat">🤖 Diet Chatbot</a>
+    </div>
+  </div>
+
+  <script>
+    function startListening() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Your browser doesn't support voice input. Try Chrome.");
+        return;
+      }
+
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => {
+        console.log("🎤 Voice listening started...");
+      };
+
+      recognition.onerror = (event) => {
+        alert("Voice input error: " + event.error);
+      };
+
+      recognition.onresult = (event) => {
+        const speech = event.results[0][0].transcript.toLowerCase();
+        const form = document.getElementById('predictForm');
+
+        if (speech.includes("predict")) {
+          form.submit();
+        } else {
+          alert("You said: " + speech + "\nSay 'predict' to submit.");
+        }
+      };
+
+      recognition.start();
+    }
+  </script>
+</body>
+</html>
+{% endblock %}
